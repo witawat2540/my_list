@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app_day2/Mystring.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,17 +32,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String url  ="https://reqres.in/";
-  var header = {HttpHeaders.contentTypeHeader: "application/json"};
+  // String url  ="https://reqres.in/";
+  // var header = {HttpHeaders.contentTypeHeader: "application/json"};
 
-  send_data_api()async{
+  send_data_api() async {
     var user = {};
     user["email"] = "eve.holt@reqres.in";
     user["password"] = "cityslicka55";
-     var req = jsonEncode(user);
-    http.Response response = await http.post(url+"api/login",body: req,headers:header,);
-    if(response.statusCode== 200){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Myuser(),));
+    var req = jsonEncode(user);
+    http.Response response = await http.post(
+      My_String().url + "api/login",
+      body: req,
+      headers: My_String().header,
+    );
+    if (response.statusCode == 200) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Myuser(),
+          ));
     }
     print(response.body);
   }

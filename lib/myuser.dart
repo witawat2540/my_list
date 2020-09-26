@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_day2/Mystring.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,14 @@ class Myuser extends StatefulWidget {
 }
 
 class _MyuserState extends State<Myuser> {
-  String url = "https://reqres.in/";
-  var header = {HttpHeaders.contentTypeHeader: "application/json"};
+  // String url = "https://reqres.in/";
+  // var header = {HttpHeaders.contentTypeHeader: "application/json"};
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   List<Datum> user = [];
 
   Future getUser() async {
-    http.Response response =
-        await http.get(url + "api/users?page=2", headers: header);
+    http.Response response = await http
+        .get(My_String().url + "api/users?page=2", headers: My_String().header);
     setState(() {
       user = myUserModelFromJson(response.body).data;
     });
