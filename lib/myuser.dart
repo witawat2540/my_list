@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:app_day2/Mystring.dart';
+import 'package:app_day2/profile.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
+import 'my_card.dart';
 import 'mymodel/my_user.dart';
 
 class Myuser extends StatefulWidget {
@@ -50,54 +52,24 @@ class _MyuserState extends State<Myuser> {
                 email: user[index].email,
                 avatar: user[index].avatar,
                 ontap: () {
-                  _globalKey.currentState.showSnackBar(SnackBar(
-                    elevation: 10,
-                    content: Text(
-                      "${user[index].firstName} ${user[index].lastName}",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  ));
+                  // _globalKey.currentState.showSnackBar(SnackBar(
+                  //   elevation: 10,
+                  //   content: Text(
+                  //     "${user[index].firstName} ${user[index].lastName}",
+                  //     style: TextStyle(fontSize: 15),
+                  //   ),
+                  // ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Profile(
+                          name: user[index].firstName,
+                          lastname: user[index].lastName,
+                        ),
+                      ));
                 },
               ),
             ),
-    );
-  }
-}
-
-class My_card extends StatelessWidget {
-  final String firstname, email, avatar;
-  final Function ontap;
-
-  const My_card({
-    Key key,
-    this.firstname,
-    this.email,
-    this.avatar,
-    this.ontap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: ListTile(
-        onTap: () {
-          // _globalKey.currentState.showSnackBar(SnackBar(
-          //   elevation: 10,
-          //   content: Text(
-          //     "${user[index].firstName} ${user[index].lastName}",
-          //     style: TextStyle(fontSize: 15),
-          //   ),
-          // ));
-        },
-        title: Text(firstname),
-        subtitle: Text(email),
-        leading: CircleAvatar(
-          backgroundColor: Colors.blue,
-          backgroundImage: NetworkImage(avatar),
-          // child: Image.network(user[index].avatar),
-        ),
-      ),
     );
   }
 }
